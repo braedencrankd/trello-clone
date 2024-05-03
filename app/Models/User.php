@@ -45,8 +45,13 @@ class User extends Authenticatable
         ];
     }
 
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
+
     public function todos()
     {
-        return $this->hasMany(Todo::class);
+        return $this->hasManyThrough(Todo::class, through: Card::class);
     }
 }

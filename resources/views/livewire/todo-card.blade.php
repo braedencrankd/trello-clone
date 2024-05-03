@@ -11,7 +11,8 @@
 	</form>
 
 	{{-- Todo List --}}
-	<x-sortable class="grid min-w-[24rem] gap-4"
+	<x-sortable class="grid gap-4"
+		group="todos"
 		handler="sort">
 		@foreach ($this->todos as $todo)
 			<x-sortable.item

@@ -21,10 +21,21 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        $user->todos()->createMany([
-            ['name' => 'First todo', 'position' => 0,],
-            ['name' => 'Second todo', 'position' => 1,],
-            ['name' => 'Third todo', 'position' => 2,]
+        auth()->login($user);
+
+        [$list_1, $list_2] = $user->cards()->createMany([
+            ['name' => 'First List'],
+            ['name' => 'Second List'],
+        ]);
+
+        $list_1->todos()->createMany([
+            ['name' => 'First Task'],
+            ['name' => 'Second Task'],
+        ]);
+
+        $list_2->todos()->createMany([
+            ['name' => 'Third Task'],
+            ['name' => 'Fourth Task'],
         ]);
     }
 }

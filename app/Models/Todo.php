@@ -2,17 +2,23 @@
 
 namespace App\Models;
 
+use App\Models\Sortable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Todo extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     protected $guarded = [];
 
-    public function user()
+    public function card()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Card::class);
+    }
+
+    protected function scopeSortable($query, $todo)
+    {
+        return $todo->card->todos();
     }
 }
